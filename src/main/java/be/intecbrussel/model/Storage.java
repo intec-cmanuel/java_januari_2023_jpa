@@ -1,15 +1,27 @@
 package be.intecbrussel.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Storage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+
     private String name;
 
+    @OneToMany
     private List<Product> storageContent;
 
     public Storage (String name) {
         this.name = name;
+        this.storageContent = new ArrayList<>();
+    }
+
+    protected Storage() {
         this.storageContent = new ArrayList<>();
     }
 

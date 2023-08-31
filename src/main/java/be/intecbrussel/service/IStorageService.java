@@ -7,13 +7,13 @@ public interface IStorageService {
     void addStorage(Storage storage);
 
     // READ
-    Storage getStorage(String name);
+    Storage getStorage(long id);
 
     // UPDATE
     void updateStorage(Storage storage);
 
     // DELETE
-    void deleteStorage(String name);
+    void deleteStorage(long id);
 
 
 }

@@ -17,33 +17,42 @@ public class ProductRepository implements IProductRepository{
         em.getTransaction().commit();
 
         em.close();
-
-        Product product1 = new Product(2,  "test", 1, 1);
-
-        em = EMFProvider.getEMF().createEntityManager();
-
-        em.getTransaction().begin();
-        em.persist(product1);
-        em.getTransaction().commit();
-
-        em.close();
-
-
-        System.out.println(product);
     }
 
     @Override
     public Product readProduct(long id) {
-        return null;
+        EntityManager em = EMFProvider.getEMF().createEntityManager();
+        Product dbProduct = em.find(Product.class, id);
+        em.close();
+
+        return dbProduct;
     }
 
     @Override
     public void updateProduct(Product product) {
+        EntityManager em = EMFProvider.getEMF().createEntityManager();
 
+        em.getTransaction().begin();
+        Product mergedProduct = em.merge(product);
+
+        if (!mergedProduct.equals(product)) {
+            em.getTransaction().rollback();
+        } else {
+            em.getTransaction().commit();
+        }
+
+         em.close();
     }
 
     @Override
     public void deleteProduct(Product product) {
+        EntityManager em = EMFProvider.getEMF().createEntityManager();
 
+        em.getTransaction().begin();
+        Product product1 = em.find(Product.class, product.getId());
+        em.remove(product1);
+        em.getTransaction().commit();
+
+        em.close();
     }
 }

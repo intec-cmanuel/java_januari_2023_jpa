@@ -7,11 +7,11 @@ public interface IStorageRepository {
     void createStorage(Storage storage);
 
     // READ
-    Storage readStorage(String name);
+    Storage readStorage(long id);
 
     // UPDATE
     void updateStorage(Storage storage);
 
     // DELETE
-    void deleteStorage(String name);
+    void deleteStorage(long id);
 }

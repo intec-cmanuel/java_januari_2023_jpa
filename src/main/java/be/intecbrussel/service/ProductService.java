@@ -4,6 +4,8 @@ import be.intecbrussel.model.Product;
 import be.intecbrussel.repository.IProductRepository;
 import be.intecbrussel.repository.ProductRepository;
 
+import java.util.Collection;
+
 public class ProductService implements IProductService{
     private IProductRepository repo = new ProductRepository();
 
@@ -14,12 +16,12 @@ public class ProductService implements IProductService{
 
     @Override
     public Product getProduct(long id) {
-        return null;
+        return repo.readProduct(id);
     }
 
     @Override
     public void updateProduct(Product product) {
-
+        repo.updateProduct(product);
     }
 
     @Override
@@ -29,6 +31,6 @@ public class ProductService implements IProductService{
 
     @Override
     public void deleteProduct(Product product) {
-
+        repo.deleteProduct(product);
     }
 }
