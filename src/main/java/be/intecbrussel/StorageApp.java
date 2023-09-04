@@ -1,12 +1,11 @@
 package be.intecbrussel;
 
+import be.intecbrussel.model.Key;
+import be.intecbrussel.model.Person;
 import be.intecbrussel.model.Product;
 import be.intecbrussel.model.Storage;
 import be.intecbrussel.repository.ProductRepository;
-import be.intecbrussel.service.IProductService;
-import be.intecbrussel.service.IStorageService;
-import be.intecbrussel.service.ProductService;
-import be.intecbrussel.service.StorageService;
+import be.intecbrussel.service.*;
 
 public class StorageApp {
     public static void main(String[] args) {
@@ -26,11 +25,31 @@ public class StorageApp {
         Storage s2 = new Storage("oops");
         s2.add(pp1,pp2,pp3);
 
+        Person person = new Person("Jean-Bon");
+        person.setFavoriteStorage(s1);
+
+        Person person1 = new Person("Jean-tille");
+        person1.setFavoriteStorage(s1);
+
+        Person person2 = new Person("Jean-Neymar");
+        person2.setFavoriteStorage(s2);
+
+        Key key = new Key();
+        key.setStorage(s2);
+
         IProductService productService = new ProductService();
         IStorageService storageService = new StorageService();
+        IPersonService personService = new PersonService();
+        IKeyService keyService = new KeyService();
 
-        storageService.addStorage(s1);
-        storageService.addStorage(s2);
+        keyService.addKey(key);
+        personService.addPerson(person);
+        personService.addPerson(person1);
+        personService.addPerson(person2);
+
+
+//        storageService.addStorage(s1);
+//        storageService.addStorage(s2);
 
         s1.setName("A bit of everything");
         Product jonathan = new Product("Spoilers", 0, 79);

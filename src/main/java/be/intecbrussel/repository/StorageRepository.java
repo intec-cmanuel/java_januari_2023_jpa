@@ -58,6 +58,7 @@ public class StorageRepository implements IStorageRepository{
         Query query = em.createQuery(queryString);
         query.setParameter(1, product.getId());
 
+        // Will throw exception if product is not part of a storage
         Storage resultList = (Storage) query.getSingleResult();
         return resultList;
     }
