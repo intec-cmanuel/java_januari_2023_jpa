@@ -19,10 +19,18 @@ public class StorageApp {
         Storage s1 = new Storage("Fruits And Trains");
         s1.add(p1,p2,p3,p4);
 
+        Product pp1 = new Product("a",1,1);
+        Product pp2 = new Product("b",1,1);
+        Product pp3 = new Product("c",1,1);
+
+        Storage s2 = new Storage("oops");
+        s2.add(pp1,pp2,pp3);
+
         IProductService productService = new ProductService();
         IStorageService storageService = new StorageService();
 
         storageService.addStorage(s1);
+        storageService.addStorage(s2);
 
         s1.setName("A bit of everything");
         Product jonathan = new Product("Spoilers", 0, 79);

@@ -54,7 +54,7 @@ public class StorageRepository implements IStorageRepository{
     @Override
     public Storage readStorage(Product product) {
         EntityManager em = EMFProvider.getEMF().createEntityManager();
-        String queryString = "select s from Storage s cross join Product p where p.id = ?1";
+        String queryString = "select s from Storage s join s.storageContent p where p.id = ?1";
         Query query = em.createQuery(queryString);
         query.setParameter(1, product.getId());
 
