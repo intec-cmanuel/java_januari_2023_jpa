@@ -20,33 +20,22 @@ public class StorageApp {
         s1.add(p1,p2,p3,p4);
 
         IProductService productService = new ProductService();
-        productService.addProduct(p1);
-
-        p1.setName("Shiny Apple");
-
         IStorageService storageService = new StorageService();
+
         storageService.addStorage(s1);
 
+        s1.setName("A bit of everything");
+        Product jonathan = new Product("Spoilers", 0, 79);
+        s1.add(jonathan);
 
-        //        System.out.println(s1);
+        storageService.updateStorage(s1);
 
-//        Product dbApple = p1;
+//        storageService.deleteStorage(1);
+        productService.deleteProduct(p2);
 
-//        Product dbApple = productService.getProduct(1);
-//        System.out.println("DB APPLE: " + dbApple);
-//
-//        dbApple.setName("Apple from the DB");
-//        productService.updateProduct(dbApple);
-//        dbApple.setWeight(5000);
-//        productService.updateProduct(dbApple);
-//
-//        System.out.println("Update DB APPLE: " + dbApple);
+        Storage dbStorage = storageService.getStorage(1);
 
-//        productService.deleteProduct(dbApple);
-
-//        Product deletedApple = productService.getProduct(dbApple.getId());
-//        System.out.println(deletedApple);
-
+        System.out.println(dbStorage);
 
     }
 

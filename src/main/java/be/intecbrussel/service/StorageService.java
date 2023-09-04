@@ -7,7 +7,16 @@ import be.intecbrussel.repository.StorageRepository;
 
 public class StorageService implements IStorageService{
     private IStorageRepository storageRepository = new StorageRepository();
-    private IProductService productService = new ProductService();
+       private IProductService productService;
+
+    protected StorageService (ProductService productService) {
+        this.productService = productService;
+    }
+
+    public StorageService () {
+        productService = new ProductService(this);
+    }
+
     @Override
     public void addStorage(Storage storage) {
         for (Product product : storage.getStorageContent()) {
@@ -22,16 +31,27 @@ public class StorageService implements IStorageService{
 
     @Override
     public Storage getStorage(long id) {
-        return null;
+        return storageRepository.readStorage(id);
     }
 
     @Override
     public void updateStorage(Storage storage) {
+        for (Product product : storage.getStorageContent()) {
+            if (product.getId() == 0) {
+                productService.addProduct(product);
+            }
+        }
 
+        storageRepository.updateStorage(storage);
     }
 
     @Override
     public void deleteStorage(long id) {
+        storageRepository.deleteStorage(id);
+    }
 
+    @Override
+    public void deleteProductFromStorage(Product product) {
+        storageRepository.readStorage(product);
     }
 }

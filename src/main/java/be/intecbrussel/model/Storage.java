@@ -8,12 +8,12 @@ import java.util.List;
 @Entity
 public class Storage {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE } )
     private List<Product> storageContent;
 
     public Storage (String name) {

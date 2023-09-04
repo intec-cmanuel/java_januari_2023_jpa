@@ -1,5 +1,6 @@
 package be.intecbrussel.service;
 
+import be.intecbrussel.model.Product;
 import be.intecbrussel.model.Storage;
 
 public interface IStorageService {
@@ -15,5 +16,5 @@ public interface IStorageService {
     // DELETE
     void deleteStorage(long id);
 
-
+    void deleteProductFromStorage(Product product);
 }
