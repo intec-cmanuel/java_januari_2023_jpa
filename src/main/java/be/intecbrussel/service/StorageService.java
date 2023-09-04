@@ -7,7 +7,7 @@ import be.intecbrussel.repository.StorageRepository;
 
 public class StorageService implements IStorageService{
     private IStorageRepository storageRepository = new StorageRepository();
-       private IProductService productService;
+    private IProductService productService;
 
     protected StorageService (ProductService productService) {
         this.productService = productService;
@@ -52,6 +52,8 @@ public class StorageService implements IStorageService{
 
     @Override
     public void deleteProductFromStorage(Product product) {
-        storageRepository.readStorage(product);
+        Storage dbStorage = storageRepository.readStorage(product);
+        dbStorage.getStorageContent().remove(product);
+        updateStorage(dbStorage);
     }
 }

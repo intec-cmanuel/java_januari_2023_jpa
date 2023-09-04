@@ -4,7 +4,6 @@ import be.intecbrussel.config.EMFProvider;
 import be.intecbrussel.model.Product;
 import be.intecbrussel.model.Storage;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 
 import java.util.List;
@@ -53,16 +52,13 @@ public class StorageRepository implements IStorageRepository{
     }
 
     @Override
-    public void readStorage(Product product) {
+    public Storage readStorage(Product product) {
         EntityManager em = EMFProvider.getEMF().createEntityManager();
-        Query query = em.createQuery(
-                "SELECT * " +
-                        "FROM storage " +
-                        "JOIN storage_product ON storage.id = storage_product.storage_id" +
-                        "JOIN product ON product.id = storage_product.storageContent_id" +
-                        "WHERE product.id = " + product.getId());
+        String queryString = "select s from Storage s cross join Product p where p.id = ?1";
+        Query query = em.createQuery(queryString);
+        query.setParameter(1, product.getId());
 
-        List resultList = query.getResultList();
-        System.out.println(resultList);
+        Storage resultList = (Storage) query.getSingleResult();
+        return resultList;
     }
 }

@@ -16,5 +16,5 @@ public interface IStorageRepository {
     // DELETE
     void deleteStorage(long id);
 
-    void readStorage(Product product);
+    Storage readStorage(Product product);
 }
