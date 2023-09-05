@@ -6,7 +6,7 @@ import be.intecbrussel.repository.IStorageRepository;
 import be.intecbrussel.repository.StorageRepository;
 
 public class StorageService implements IStorageService{
-    private IStorageRepository storageRepository = new StorageRepository();
+    private StorageRepository storageRepository = new StorageRepository();
     private IProductService productService;
 
     protected StorageService (ProductService productService) {

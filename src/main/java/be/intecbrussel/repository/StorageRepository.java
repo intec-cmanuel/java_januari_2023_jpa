@@ -8,48 +8,7 @@ import jakarta.persistence.Query;
 
 import java.util.List;
 
-public class StorageRepository implements IStorageRepository{
-    @Override
-    public void createStorage(Storage storage) {
-        EntityManager em = EMFProvider.getEMF().createEntityManager();
-
-        em.getTransaction().begin();
-        em.persist(storage);
-        em.getTransaction().commit();
-
-        em.close();
-    }
-
-    @Override
-    public Storage readStorage(long id) {
-        EntityManager em = EMFProvider.getEMF().createEntityManager();
-        Storage dbStorage = em.find(Storage.class, id);
-        em.close();
-        return dbStorage;
-    }
-
-    @Override
-    public void updateStorage(Storage storage) {
-        EntityManager entityManager = EMFProvider.getEMF().createEntityManager();
-
-        entityManager.getTransaction().begin();
-        entityManager.merge(storage);
-        entityManager.getTransaction().commit();
-
-        entityManager.close();
-    }
-
-    @Override
-    public void deleteStorage(long id) {
-        EntityManager em = EMFProvider.getEMF().createEntityManager();
-
-        em.getTransaction().begin();
-        Storage dbStorage = em.find(Storage.class, id);
-        em.remove(dbStorage);
-        em.getTransaction().commit();
-
-        em.close();
-    }
+public class StorageRepository extends EntityRepository<Storage> implements IStorageRepository{
 
     @Override
     public Storage readStorage(Product product) {
