@@ -47,7 +47,7 @@ public class StorageApp {
         personService.addPerson(person1);
         personService.addPerson(person2);
 
-
+        productService.
 //        storageService.addStorage(s1);
 //        storageService.addStorage(s2);
 

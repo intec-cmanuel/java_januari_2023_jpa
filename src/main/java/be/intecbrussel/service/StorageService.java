@@ -18,42 +18,42 @@ public class StorageService implements IStorageService{
     }
 
     @Override
-    public void addStorage(Storage storage) {
+    public void add(Storage storage) {
         for (Product product : storage.getStorageContent()) {
             if (product.getId() == 0) {
-                productService.addProduct(product);
+                productService.add(product);
             } else {
-                productService.updateProduct(product);
+                productService.update(product);
             }
         }
-        storageRepository.createStorage(storage);
+        storageRepository.create(storage);
     }
 
     @Override
-    public Storage getStorage(long id) {
-        return storageRepository.readStorage(id);
+    public Storage get(Long id) {
+        return storageRepository.read(Storage.class, id);
     }
 
     @Override
-    public void updateStorage(Storage storage) {
+    public void update(Storage storage) {
         for (Product product : storage.getStorageContent()) {
             if (product.getId() == 0) {
-                productService.addProduct(product);
+                productService.add(product);
             }
         }
 
-        storageRepository.updateStorage(storage);
+        storageRepository.update(storage);
     }
 
     @Override
-    public void deleteStorage(long id) {
-        storageRepository.deleteStorage(id);
+    public void delete(Long id) {
+        storageRepository.delete(Storage.class, id);
     }
 
     @Override
     public void deleteProductFromStorage(Product product) {
         Storage dbStorage = storageRepository.readStorage(product);
         dbStorage.getStorageContent().remove(product);
-        updateStorage(dbStorage);
+        update(dbStorage);
     }
 }

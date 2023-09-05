@@ -6,7 +6,7 @@ import be.intecbrussel.repository.IPersonRepository;
 import be.intecbrussel.repository.IStorageRepository;
 import be.intecbrussel.repository.PersonRepository;
 
-public class PersonService implements IPersonService{
+public class PersonService extends EntityService<Person> implements IPersonService{
     private IStorageService storageService;
     private IPersonRepository personRepository = new PersonRepository();
 
@@ -19,27 +19,28 @@ public class PersonService implements IPersonService{
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void add(Person person) {
         Storage favStorage = person.getFavoriteStorage();
         if (favStorage != null && favStorage.getId() == 0) {
-            storageService.addStorage(favStorage);
+            storageService.add(favStorage);
         }
 
-        personRepository.createPerson(person);
+        personRepository.create(person);
     }
 
     @Override
-    public Person getPerson(long id) {
+    public Person get(Long id) {
         return null;
     }
 
     @Override
-    public void updatePerson(Person person) {
+    public void update(Person person) {
 
     }
 
     @Override
-    public void deletePerson(long id) {
+    public void delete(Long id) {
 
     }
+
 }

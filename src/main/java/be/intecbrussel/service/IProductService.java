@@ -4,22 +4,6 @@ import be.intecbrussel.model.Product;
 
 import java.util.Collection;
 
-public interface IProductService {
-    // CREATE
-    void addProduct(Product product);
-
-//    void addOrUpdateAllProducts(Collection<Product> products);
-
-    // READ
-    Product getProduct(long id);
-
-    // UPDATE
-    void updateProduct(Product product);
-
-    // DELETE
-    void deleteProduct(long id);
+public interface IProductService extends IEntityService<Product, Long> {
     void deleteProduct(Product product);
-
-
-
 }

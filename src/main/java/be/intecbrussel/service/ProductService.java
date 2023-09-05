@@ -14,33 +14,34 @@ public class ProductService implements IProductService{
         this.storageService = storageService;
     }
 
+
     public ProductService() {
         storageService = new StorageService(this);
     }
 
     @Override
-    public void addProduct(Product product) {
-        repo.createProduct(product);
+    public void add(Product product) {
+        repo.create(product);
     }
 
     @Override
-    public Product getProduct(long id) {
-        return repo.readProduct(id);
+    public Product get(Long id) {
+        return repo.read(Product.class, id);
     }
 
     @Override
-    public void updateProduct(Product product) {
-        repo.updateProduct(product);
+    public void update(Product product) {
+        repo.update(product);
     }
 
     @Override
-    public void deleteProduct(long id) {
-        deleteProduct(getProduct(id));
+    public void delete(Long id) {
+        repo.delete(Product.class, id);
     }
 
     @Override
     public void deleteProduct(Product product) {
         storageService.deleteProductFromStorage(product);
-        repo.deleteProduct(product);
+        delete(product.getId());
     }
 }
