@@ -21,6 +21,7 @@ public class StorageService implements IStorageService {
             update(storage);
         }
 
+        storageRepository.create(storage);
         for (Product product : storage.getStorageContent()) {
             if (product.getId() == 0) {
                 productService.add(product);
@@ -28,7 +29,6 @@ public class StorageService implements IStorageService {
                 productService.update(product);
             }
         }
-        storageRepository.create(storage);
     }
 
     @Override
