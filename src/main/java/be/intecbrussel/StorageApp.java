@@ -1,17 +1,8 @@
 package be.intecbrussel;
 
-import be.intecbrussel.model.Key;
-import be.intecbrussel.model.Person;
-import be.intecbrussel.model.Product;
-import be.intecbrussel.model.Storage;
-import be.intecbrussel.service.implementions.KeyService;
-import be.intecbrussel.service.implementions.PersonService;
-import be.intecbrussel.service.implementions.ProductService;
-import be.intecbrussel.service.implementions.StorageService;
-import be.intecbrussel.service.entities.IKeyService;
-import be.intecbrussel.service.entities.IPersonService;
-import be.intecbrussel.service.entities.IProductService;
-import be.intecbrussel.service.entities.IStorageService;
+import be.intecbrussel.model.*;
+import be.intecbrussel.service.entities.*;
+import be.intecbrussel.service.implementions.*;
 
 public class StorageApp {
     public static void main(String[] args) {
@@ -43,10 +34,14 @@ public class StorageApp {
         Key key = new Key();
         key.setStorage(s2);
 
-        IProductService productService = new ProductService();
-        IStorageService storageService = new StorageService();
-        IPersonService personService = new PersonService();
-        IKeyService keyService = new KeyService();
+        Job job = new Job("Java Developer", "Develop in java");
+        job.getEmployees().add(person2);
+
+        IProductService productService = Service.getProductService();
+        IStorageService storageService = Service.getStorageService();
+        IPersonService personService = Service.getPersonService();
+        IKeyService keyService = Service.getKeyService();
+        IJobService jobService = Service.getJobService();
 
         keyService.add(key);
 
@@ -62,7 +57,8 @@ public class StorageApp {
         Person dbPerson = personService.get(1L);
         System.out.println(dbPerson);
 
-        storageService.delete(s2.getId());
+//        storageService.delete(s2.getId());
+        jobService.add(job);
     }
 
 }

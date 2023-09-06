@@ -4,6 +4,7 @@ import be.intecbrussel.model.Person;
 import be.intecbrussel.model.Storage;
 import be.intecbrussel.repository.entities.IPersonRepository;
 import be.intecbrussel.repository.implementations.PersonRepository;
+import be.intecbrussel.service.entities.IJobService;
 import be.intecbrussel.service.entities.IPersonService;
 import be.intecbrussel.service.entities.IStorageService;
 
@@ -13,6 +14,7 @@ public class PersonService implements IPersonService {
     private IPersonRepository personRepository = new PersonRepository();
 
     protected IStorageService storageService = Service.getStorageService();
+    protected IJobService jobService = Service.getJobService();
 
     @Override
     public void add(Person person) {
@@ -47,6 +49,7 @@ public class PersonService implements IPersonService {
 
     @Override
     public void delete(Long id) {
+        jobService.deletePersonFromJob(get(id));
         personRepository.delete(Person.class, id);
     }
 
