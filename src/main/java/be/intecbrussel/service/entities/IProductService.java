@@ -1,8 +1,7 @@
-package be.intecbrussel.service;
+package be.intecbrussel.service.entities;
 
 import be.intecbrussel.model.Product;
-
-import java.util.Collection;
+import be.intecbrussel.service.IEntityService;
 
 public interface IProductService extends IEntityService<Product, Long> {
     void deleteProduct(Product product);

@@ -4,8 +4,14 @@ import be.intecbrussel.model.Key;
 import be.intecbrussel.model.Person;
 import be.intecbrussel.model.Product;
 import be.intecbrussel.model.Storage;
-import be.intecbrussel.repository.ProductRepository;
-import be.intecbrussel.service.*;
+import be.intecbrussel.service.implementions.KeyService;
+import be.intecbrussel.service.implementions.PersonService;
+import be.intecbrussel.service.implementions.ProductService;
+import be.intecbrussel.service.implementions.StorageService;
+import be.intecbrussel.service.entities.IKeyService;
+import be.intecbrussel.service.entities.IPersonService;
+import be.intecbrussel.service.entities.IProductService;
+import be.intecbrussel.service.entities.IStorageService;
 
 public class StorageApp {
     public static void main(String[] args) {
@@ -42,28 +48,21 @@ public class StorageApp {
         IPersonService personService = new PersonService();
         IKeyService keyService = new KeyService();
 
-        keyService.addKey(key);
-        personService.addPerson(person);
-        personService.addPerson(person1);
-        personService.addPerson(person2);
+        keyService.add(key);
 
-        productService.
-//        storageService.addStorage(s1);
-//        storageService.addStorage(s2);
+        s2.setName("Someone forgot to merge");
 
-        s1.setName("A bit of everything");
-        Product jonathan = new Product("Spoilers", 0, 79);
-        s1.add(jonathan);
+        keyService.update(key);
 
-        storageService.updateStorage(s1);
+        personService.add(person2);
 
-//        storageService.deleteStorage(1);
-        productService.deleteProduct(p2);
+        Key dbKey = keyService.get(1L);
+        System.out.println(dbKey);
 
-        Storage dbStorage = storageService.getStorage(1);
+        Person dbPerson = personService.get(1L);
+        System.out.println(dbPerson);
 
-        System.out.println(dbStorage);
-
+        storageService.delete(s2.getId());
     }
 
 }

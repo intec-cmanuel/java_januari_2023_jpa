@@ -9,7 +9,7 @@ public class Key {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Storage storage;
 
     public long getId() {

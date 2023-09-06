@@ -1,12 +1,11 @@
-package be.intecbrussel.service;
+package be.intecbrussel.service.implementions;
 
 import be.intecbrussel.model.Product;
-import be.intecbrussel.repository.IProductRepository;
-import be.intecbrussel.repository.ProductRepository;
+import be.intecbrussel.repository.entities.IProductRepository;
+import be.intecbrussel.repository.implementations.ProductRepository;
+import be.intecbrussel.service.entities.IProductService;
 
-import java.util.Collection;
-
-public class ProductService implements IProductService{
+public class ProductService implements IProductService {
     private IProductRepository repo = new ProductRepository();
     private StorageService storageService;
 
@@ -21,6 +20,10 @@ public class ProductService implements IProductService{
 
     @Override
     public void add(Product product) {
+        if (product.getId() != 0) {
+            update(product);
+        }
+
         repo.create(product);
     }
 
@@ -36,12 +39,20 @@ public class ProductService implements IProductService{
 
     @Override
     public void delete(Long id) {
-        repo.delete(Product.class, id);
+        if (id == 0) {
+            return;
+        }
+
+        deleteProduct(get(id));
     }
 
     @Override
     public void deleteProduct(Product product) {
+        if (product.getId() == 0) {
+            return;
+        }
+
         storageService.deleteProductFromStorage(product);
-        delete(product.getId());
+        repo.delete(Product.class, product.getId());
     }
 }

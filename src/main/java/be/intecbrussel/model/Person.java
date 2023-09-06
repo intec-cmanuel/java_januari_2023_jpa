@@ -9,7 +9,7 @@ public class Person {
     private long id;
     private String name;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.MERGE)
     private Storage favoriteStorage;
 
     protected Person() {}

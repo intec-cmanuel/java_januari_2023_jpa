@@ -1,13 +1,18 @@
-package be.intecbrussel.service;
+package be.intecbrussel.service.implementions;
 
 import be.intecbrussel.model.Product;
 import be.intecbrussel.model.Storage;
-import be.intecbrussel.repository.IStorageRepository;
-import be.intecbrussel.repository.StorageRepository;
+import be.intecbrussel.repository.implementations.StorageRepository;
+import be.intecbrussel.service.entities.IKeyService;
+import be.intecbrussel.service.entities.IPersonService;
+import be.intecbrussel.service.entities.IProductService;
+import be.intecbrussel.service.entities.IStorageService;
 
-public class StorageService implements IStorageService{
+public class StorageService implements IStorageService {
     private StorageRepository storageRepository = new StorageRepository();
     private IProductService productService;
+    private IKeyService keyService = new KeyService();
+    private IPersonService personService = new PersonService();
 
     protected StorageService (ProductService productService) {
         this.productService = productService;
@@ -19,6 +24,10 @@ public class StorageService implements IStorageService{
 
     @Override
     public void add(Storage storage) {
+        if (storage.getId() != 0) {
+            update(storage);
+        }
+
         for (Product product : storage.getStorageContent()) {
             if (product.getId() == 0) {
                 productService.add(product);
@@ -47,6 +56,9 @@ public class StorageService implements IStorageService{
 
     @Override
     public void delete(Long id) {
+        Storage dbStorage = get(id);
+        keyService.deleteKeyByStorage(dbStorage);
+        personService.deleteStorageFromPerson(dbStorage);
         storageRepository.delete(Storage.class, id);
     }
 

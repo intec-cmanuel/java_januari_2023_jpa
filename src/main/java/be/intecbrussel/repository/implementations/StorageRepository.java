@@ -1,14 +1,14 @@
-package be.intecbrussel.repository;
+package be.intecbrussel.repository.implementations;
 
 import be.intecbrussel.config.EMFProvider;
 import be.intecbrussel.model.Product;
 import be.intecbrussel.model.Storage;
+import be.intecbrussel.repository.EntityRepository;
+import be.intecbrussel.repository.entities.IStorageRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
-import java.util.List;
-
-public class StorageRepository extends EntityRepository<Storage> implements IStorageRepository{
+public class StorageRepository extends EntityRepository<Storage> implements IStorageRepository {
 
     @Override
     public Storage readStorage(Product product) {
@@ -19,6 +19,9 @@ public class StorageRepository extends EntityRepository<Storage> implements ISto
 
         // Will throw exception if product is not part of a storage
         Storage resultList = (Storage) query.getSingleResult();
+
+        em.close();
+
         return resultList;
     }
 }
