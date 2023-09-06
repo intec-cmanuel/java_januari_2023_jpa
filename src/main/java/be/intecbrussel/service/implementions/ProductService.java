@@ -4,19 +4,12 @@ import be.intecbrussel.model.Product;
 import be.intecbrussel.repository.entities.IProductRepository;
 import be.intecbrussel.repository.implementations.ProductRepository;
 import be.intecbrussel.service.entities.IProductService;
+import be.intecbrussel.service.entities.IStorageService;
 
 public class ProductService implements IProductService {
     private IProductRepository repo = new ProductRepository();
-    private StorageService storageService;
 
-    protected ProductService (StorageService storageService) {
-        this.storageService = storageService;
-    }
-
-
-    public ProductService() {
-        storageService = new StorageService(this);
-    }
+    protected IStorageService storageService = Service.getStorageService();
 
     @Override
     public void add(Product product) {

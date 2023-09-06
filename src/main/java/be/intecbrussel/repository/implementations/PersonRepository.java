@@ -15,7 +15,7 @@ public class PersonRepository extends EntityRepository<Person> implements IPerso
     @Override
     public List<Person> readPeople(Storage favStorage) {
         EntityManager em = EMFProvider.getEMF().createEntityManager();
-        String queryString = "select p from Person join p.favoriteStorage s where s.id = ?1";
+        String queryString = "select p from Person p join p.favoriteStorage s where s.id = ?1";
         Query query = em.createQuery(queryString);
         query.setParameter(1, favStorage.getId());
 

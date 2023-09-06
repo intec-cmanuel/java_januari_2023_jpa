@@ -13,7 +13,7 @@ public class KeyRepository extends EntityRepository<Key> implements IKeyReposito
     @Override
     public Key readKey(Storage storage) {
         EntityManager em = EMFProvider.getEMF().createEntityManager();
-        String queryString = "select k from KeyTable k join k.storage s where s.id = ?1";
+        String queryString = "select k from Key k join k.storage s where s.id = ?1";
         Query query = em.createQuery(queryString);
         query.setParameter(1, storage.getId());
 

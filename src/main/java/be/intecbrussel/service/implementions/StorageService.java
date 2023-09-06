@@ -10,17 +10,10 @@ import be.intecbrussel.service.entities.IStorageService;
 
 public class StorageService implements IStorageService {
     private StorageRepository storageRepository = new StorageRepository();
-    private IProductService productService;
-    private IKeyService keyService = new KeyService();
-    private IPersonService personService = new PersonService();
 
-    protected StorageService (ProductService productService) {
-        this.productService = productService;
-    }
-
-    public StorageService () {
-        productService = new ProductService(this);
-    }
+    protected IProductService productService = Service.getProductService();
+    protected IKeyService keyService = Service.getKeyService();
+    protected IPersonService personService = Service.getPersonService();
 
     @Override
     public void add(Storage storage) {

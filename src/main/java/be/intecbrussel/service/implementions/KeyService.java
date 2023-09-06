@@ -7,8 +7,9 @@ import be.intecbrussel.repository.implementations.KeyRepository;
 import be.intecbrussel.service.entities.IKeyService;
 
 public class KeyService implements IKeyService {
-    private StorageService storageService = new StorageService();
     private IKeyRepository keyRepository = new KeyRepository();
+
+    protected StorageService storageService = Service.getStorageService();
 
     @Override
     public void add(Key key) {

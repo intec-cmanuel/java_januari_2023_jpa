@@ -10,16 +10,9 @@ import be.intecbrussel.service.entities.IStorageService;
 import java.util.List;
 
 public class PersonService implements IPersonService {
-    private IStorageService storageService;
     private IPersonRepository personRepository = new PersonRepository();
 
-    protected PersonService(StorageService ss) {
-        this.storageService = ss;
-    }
-
-    public PersonService() {
-        this.storageService = new StorageService();
-    }
+    protected IStorageService storageService = Service.getStorageService();
 
     @Override
     public void add(Person person) {
