@@ -14,7 +14,7 @@ public class Job {
     private String jobTitle;
     private String jobDescription;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<Person> employees = new ArrayList<>();
 
     protected Job(){}

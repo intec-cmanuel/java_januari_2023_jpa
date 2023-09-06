@@ -1,9 +1,6 @@
 package be.intecbrussel.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -16,6 +13,9 @@ public class Product {
     private String name;
     private double value;
     private double weight;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Storage storage;
 
     protected Product () {
 
@@ -32,6 +32,19 @@ public class Product {
         this.value = value;
         this.weight = weight;
         this.id = id;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+
+        if (!storage.getStorageContent().contains(this)) {
+            storage.add(this);
+        }
+
+    }
+
+    public Storage getStorage() {
+        return storage;
     }
 
     public long getId() {

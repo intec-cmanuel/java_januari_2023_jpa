@@ -59,6 +59,18 @@ public class StorageApp {
 
 //        storageService.delete(s2.getId());
         jobService.add(job);
+
+        job.setJobTitle("C# developer");
+        job.setJobDescription("Develop in C#");
+
+        jobService.update(job);
+
+//        jobService.delete(1L);
+
+        Job dbJob = jobService.get(1L);
+        System.out.println(dbJob);
+
+
     }
 
 }

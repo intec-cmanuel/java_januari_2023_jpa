@@ -13,7 +13,7 @@ public class Storage {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE } )
+    @OneToMany(mappedBy = "storage", fetch = FetchType.EAGER, cascade = { CascadeType.MERGE } )
     private List<Product> storageContent;
 
     public Storage (String name) {
@@ -33,6 +33,9 @@ public class Storage {
 
     public void add(Product product) {
         storageContent.add(product);
+        if (product.getStorage() != this){
+            product.setStorage(this);
+        }
     }
 
     public String getName() {
