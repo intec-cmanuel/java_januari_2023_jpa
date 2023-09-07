@@ -14,8 +14,8 @@ public class Job {
     private String jobTitle;
     private String jobDescription;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private List<Person> employees = new ArrayList<>();
+    @OneToMany(mappedBy = "job", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private List<PersonalJob> employees = new ArrayList<>();
 
     protected Job(){}
 
@@ -44,7 +44,7 @@ public class Job {
         this.jobDescription = jobDescription;
     }
 
-    public List<Person> getEmployees() {
+    public List<PersonalJob> getEmployees() {
         return employees;
     }
 

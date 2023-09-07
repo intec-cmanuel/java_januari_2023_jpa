@@ -2,6 +2,9 @@ package be.intecbrussel.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Person {
     @Id
@@ -11,6 +14,9 @@ public class Person {
 
     @ManyToOne (cascade = CascadeType.MERGE)
     private Storage favoriteStorage;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private List<PersonalJob> jobs = new ArrayList<>();
 
     protected Person() {}
 
@@ -36,6 +42,10 @@ public class Person {
 
     public void setFavoriteStorage(Storage favoriteStorage) {
         this.favoriteStorage = favoriteStorage;
+    }
+
+    public List<PersonalJob> getJobs() {
+        return jobs;
     }
 
     @Override
