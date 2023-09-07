@@ -2,21 +2,25 @@ package be.intecbrussel.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 public class PersonalJob {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @EmbeddedId
+    private PersonJobId id;
 
     @ManyToOne (cascade = CascadeType.MERGE)
+    @MapsId("jobId")
     private Job job;
 
     @ManyToOne (cascade = CascadeType.MERGE)
+    @MapsId("personId")
     private Person person;
 
     private double salary;
 
     public PersonalJob (Job job, Person person, double salary) {
+        this.id = new PersonJobId(job.getId(), person.getId());
         this.job = job;
         this.person = person;
         this.salary = salary;
@@ -26,10 +30,6 @@ public class PersonalJob {
 
     public Job getJob() {
         return job;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public double getSalary() {
@@ -60,5 +60,18 @@ public class PersonalJob {
                 ", person=" + person +
                 ", salary=" + salary +
                 '}';
+    }
+
+    @Embeddable
+    private static class PersonJobId  {
+        private long jobId;
+        private long personId;
+
+        public PersonJobId(long jobId, long personId){
+            this.jobId = jobId;
+            this.personId = personId;
+        }
+
+        public PersonJobId(){}
     }
 }

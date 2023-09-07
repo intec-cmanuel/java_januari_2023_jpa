@@ -54,8 +54,12 @@ public class StorageApp {
         j1.getEmployees().add(jeanbonsCutsOfJeanbons);
         person.getJobs().add(jeanbonsCutsOfJeanbons);
 
+        PersonalJob p = new PersonalJob(job, person1, 1234);
+        job.getEmployees().add(p);
+        person1.getJobs().add(p);
 
         jobService.add(j1);
+        jobService.add(job);
 
         j1 = jobService.get(j1.getId());
         System.out.println(j1);

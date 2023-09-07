@@ -21,11 +21,11 @@ public class JobService implements IJobService {
         }
 
         for (PersonalJob employee : job.getEmployees()) {
-            if (employee.getId() == 0) {
+//            if (employee.getId() == 0) {
                 //personService.add(employee);
-            } else {
+//            } else {
                 //personService.update(employee);
-            }
+//            }
         }
 
         jobRepository.create(job);
@@ -40,10 +40,10 @@ public class JobService implements IJobService {
     @Override
     public void update(Job job) {
         for (PersonalJob employee : job.getEmployees()) {
-            if (employee.getId() == 0) {
+//            if (employee.getId() == 0) {
                 // TODO DO THIS
                 // personService.add(employee);
-            }
+//            }
         }
 
         jobRepository.update(job);
